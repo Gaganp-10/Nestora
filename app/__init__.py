@@ -6,12 +6,6 @@ from app.extensions import db, migrate, jwt, cors
 
 
 def create_app(config_name: str = None) -> Flask:
-    """
-    Flask application factory.
-
-    :param config_name: one of 'development', 'production', 'default'
-                        Defaults to the FLASK_ENV environment variable.
-    """
     app = Flask(__name__, instance_relative_config=False)
 
     # ------------------------------------------------------------------ #
@@ -27,7 +21,6 @@ def create_app(config_name: str = None) -> Flask:
         app.config["UPLOAD_FOLDER"],
     )
     os.makedirs(upload_folder, exist_ok=True)
-    # Store the absolute upload path for helpers
     app.config["UPLOAD_FOLDER"] = upload_folder
 
     # ------------------------------------------------------------------ #
@@ -36,11 +29,36 @@ def create_app(config_name: str = None) -> Flask:
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
+
+    # ✅ FIXED CORS — replaces the old cors.init_app call
     cors.init_app(
         app,
-        origins=app.config.get("CORS_ORIGINS", ["http://localhost:5173"]),
-        supports_credentials=True,
+        resources={r"/*": {"origins": "*"}},
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        supports_credentials=False,
     )
+
+    # ------------------------------------------------------------------ #
+    # Handle OPTIONS preflight requests manually
+    # ------------------------------------------------------------------ #
+    @app.before_request
+    def handle_preflight():
+        from flask import request, Response
+        if request.method == "OPTIONS":
+            res = Response()
+            res.headers["Access-Control-Allow-Origin"] = "*"
+            res.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+            res.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+            res.headers["Access-Control-Max-Age"] = "3600"
+            return res
+
+    @app.after_request
+    def add_cors_headers(response):
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+        return response
 
     # ------------------------------------------------------------------ #
     # Import models so Flask-Migrate discovers them
@@ -56,22 +74,27 @@ def create_app(config_name: str = None) -> Flask:
     from app.routes.rooms import rooms_bp
     from app.routes.images import images_bp
     from app.routes.reviews import reviews_bp
+    from app.routes.admin import admin_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(hostels_bp)
     app.register_blueprint(rooms_bp)
     app.register_blueprint(images_bp)
     app.register_blueprint(reviews_bp)
+    app.register_blueprint(admin_bp)
 
     # ------------------------------------------------------------------ #
-    # Static uploads route  GET /uploads/<path:filename>
+    # Static uploads route
     # ------------------------------------------------------------------ #
     @app.route("/uploads/<path:filename>")
     def serve_upload(filename):
-        return send_from_directory(upload_folder, filename)
+        response = send_from_directory(upload_folder, filename)
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        return response
 
     # ------------------------------------------------------------------ #
-    # Health check  GET /api/health
+    # Health check
     # ------------------------------------------------------------------ #
     @app.route("/api/health", methods=["GET"])
     def health():
