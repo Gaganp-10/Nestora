@@ -1,0 +1,468 @@
+/* ============================================
+   HostelDetail.css
+   ============================================ */
+.hostel-detail-page {
+  background: var(--bg-secondary);
+  min-height: 100vh;
+}
+
+.hostel-detail-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+/* ── Breadcrumb ── */
+.hostel-detail-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.hostel-detail-breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.hostel-detail-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.hostel-detail-breadcrumb span {
+  color: var(--text-light);
+}
+
+/* ── Header ── */
+.hostel-detail-header {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+
+.hostel-detail-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.hostel-detail-title {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.hostel-detail-share-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hostel-detail-share-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.hostel-detail-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.hostel-detail-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hostel-detail-meta-item .icon {
+  color: var(--primary);
+}
+
+/* ── Two Column Layout ── */
+.hostel-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* ── Left Column ── */
+.hostel-detail-left {}
+
+.hostel-detail-section {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+
+.hostel-detail-section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid var(--primary-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hostel-detail-section-title .icon {
+  color: var(--primary);
+}
+
+.hostel-detail-description {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* ── Amenities ── */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-md);
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.amenity-item:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.amenity-icon {
+  font-size: 18px;
+}
+
+/* ── Rooms Table ── */
+.rooms-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.rooms-table th {
+  background: var(--bg-secondary);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.rooms-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.rooms-table tr:last-child td {
+  border-bottom: none;
+}
+
+.rooms-table tr:hover td {
+  background: var(--bg-secondary);
+}
+
+.rooms-table .rent-cell {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: var(--font-size-base);
+}
+
+.rooms-table .available-cell {
+  color: var(--success);
+  font-weight: 500;
+}
+
+/* ── Reviews ── */
+.reviews-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-lg);
+}
+
+.reviews-big-number {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.reviews-big-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.reviews-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--border);
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── Add Review Form ── */
+.add-review-form {
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.add-review-form h4 {
+  margin-bottom: var(--space-md);
+}
+
+.review-star-select {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--space-md);
+}
+
+.review-star-btn {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: var(--border);
+  transition: var(--transition);
+  padding: 0;
+}
+
+.review-star-btn.active {
+  color: var(--warning);
+}
+
+/* ── Right Column: Contact Card ── */
+.hostel-detail-right {}
+
+.contact-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  position: sticky;
+  top: 90px;
+  box-shadow: var(--shadow-md);
+}
+
+.contact-card-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.contact-card-price {
+  background: var(--primary-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.contact-card-price-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.contact-card-price-value {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.contact-owner-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.contact-owner-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.contact-owner-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.contact-owner-tag {
+  font-size: var(--font-size-xs);
+  color: var(--text-light);
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-phone-reveal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.contact-phone-number {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.contact-whatsapp-btn {
+  background: #25D366;
+  color: #fff;
+  border-color: #25D366;
+}
+
+.contact-whatsapp-btn:hover {
+  background: #1fb958;
+  border-color: #1fb958;
+}
+
+.contact-report {
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+.contact-report-link {
+  font-size: var(--font-size-xs);
+  color: var(--text-light);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.contact-report-link:hover {
+  color: var(--danger);
+}
+
+/* ── Similar Hostels ── */
+.similar-section {
+  padding: var(--space-2xl) 0;
+}
+
+.similar-scroll {
+  display: flex;
+  gap: var(--space-lg);
+  overflow-x: auto;
+  padding-bottom: var(--space-sm);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.similar-scroll .hostel-card {
+  min-width: 280px;
+  max-width: 280px;
+}
+
+/* ── Loading / Error ── */
+.hostel-detail-loading,
+.hostel-detail-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: var(--space-md);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hostel-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .hostel-detail-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .reviews-summary {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .reviews-divider {
+    width: 60px;
+    height: 1px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

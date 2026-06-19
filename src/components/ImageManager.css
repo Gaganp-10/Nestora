@@ -1,0 +1,272 @@
+/* ImageManager.css */
+
+.img-manager { display: flex; flex-direction: column; gap: 24px; }
+
+/* ── Count bar ──────────────────────────────────────────── */
+.img-manager-count-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.img-manager-count-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.img-manager-count-label strong { color: #E85D26; }
+
+.img-manager-count-bar {
+  height: 6px;
+  flex: 1;
+  max-width: 200px;
+  background: #E2E8F0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.img-manager-count-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #E85D26, #ff7a47);
+  transition: width 0.4s ease;
+}
+
+.img-manager-count-fill.full { background: #10B981; }
+
+/* ── Image Grid ─────────────────────────────────────────── */
+.img-manager-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+/* Skeleton */
+.img-manager-skeleton {
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+  background-size: 200% 100%;
+  animation: shimmerMgr 1.4s infinite;
+}
+
+@keyframes shimmerMgr {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── Image Card ─────────────────────────────────────────── */
+.img-manager-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #F1F5F9;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+}
+
+.img-manager-card.is-primary {
+  border-color: #E85D26;
+  box-shadow: 0 0 0 3px rgba(232,93,38,0.15);
+}
+
+.img-manager-card-img {
+  flex: 1;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.img-manager-card:hover .img-manager-card-img { transform: scale(1.04); }
+
+/* Primary badge */
+.img-manager-primary-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #E85D26;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+/* Upload date */
+.img-manager-date {
+  padding: 5px 8px;
+  font-size: 0.65rem;
+  color: #94A3B8;
+  background: rgba(255,255,255,0.95);
+  border-top: 1px solid #F1F5F9;
+  text-align: right;
+}
+
+/* Hover overlay */
+.img-manager-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  padding: 10px;
+  backdrop-filter: blur(2px);
+}
+
+.img-manager-card:hover .img-manager-overlay { opacity: 1; }
+
+.img-manager-overlay-btn {
+  width: 100%;
+  max-width: 140px;
+  padding: 7px 12px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.img-manager-overlay-btn:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.6); }
+.img-manager-overlay-btn.primary-btn { background: rgba(232,93,38,0.8); border-color: transparent; }
+.img-manager-overlay-btn.primary-btn:hover { background: rgba(232,93,38,1); }
+.img-manager-overlay-btn.delete-btn { background: rgba(239,68,68,0.8); border-color: transparent; }
+.img-manager-overlay-btn.delete-btn:hover { background: rgba(239,68,68,1); }
+.img-manager-overlay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Spinner overlay on action */
+.img-manager-card-spinner {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+
+.img-manager-card-spinner-icon {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #E2E8F0;
+  border-top-color: #E85D26;
+  border-radius: 50%;
+  animation: spinMgr 0.7s linear infinite;
+}
+
+@keyframes spinMgr { to { transform: rotate(360deg); } }
+
+/* ── Confirm delete dialog ──────────────────────────────── */
+.img-manager-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.img-manager-confirm {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.img-manager-confirm h3 { font-size: 1.1rem; font-weight: 800; color: #1E293B; margin-bottom: 10px; }
+.img-manager-confirm p  { font-size: 0.875rem; color: #64748B; margin-bottom: 24px; }
+
+.img-manager-confirm-actions { display: flex; gap: 12px; justify-content: center; }
+
+.img-manager-btn {
+  padding: 9px 22px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  border: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.img-manager-btn.outline { border-color: #E2E8F0; background: #fff; color: #374151; }
+.img-manager-btn.outline:hover { border-color: #94A3B8; }
+.img-manager-btn.danger  { background: #EF4444; color: #fff; border-color: #EF4444; }
+.img-manager-btn.danger:hover  { background: #DC2626; }
+.img-manager-btn.danger:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Empty state ────────────────────────────────────────── */
+.img-manager-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: #94A3B8;
+  background: #F8FAFC;
+  border-radius: 12px;
+  border: 2px dashed #E2E8F0;
+}
+
+.img-manager-empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.img-manager-empty h4 { font-size: 0.95rem; font-weight: 700; color: #64748B; margin-bottom: 6px; }
+.img-manager-empty p  { font-size: 0.8rem; }
+
+/* ── Upload section ─────────────────────────────────────── */
+.img-manager-upload-section {
+  border-top: 1.5px dashed #E2E8F0;
+  padding-top: 20px;
+}
+
+.img-manager-upload-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.img-manager-upload-disabled {
+  padding: 20px;
+  background: #F8FAFC;
+  border-radius: 10px;
+  border: 1.5px dashed #E2E8F0;
+  text-align: center;
+  color: #94A3B8;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .img-manager-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .img-manager-grid { grid-template-columns: 1fr; }
+}

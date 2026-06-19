@@ -1,0 +1,289 @@
+/* ImageUploader.css */
+
+.img-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Drop Zone ─────────────────────────────────────────── */
+.img-uploader-zone {
+  border: 2px dashed #CBD5E1;
+  border-radius: 12px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #FAFAFA;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-uploader-zone:hover:not(.disabled) {
+  border-color: #E85D26;
+  background: #FFF7F4;
+}
+
+.img-uploader-zone.dragover {
+  border-color: #E85D26;
+  background: #FFF0EB;
+  transform: scale(1.005);
+  box-shadow: 0 0 0 4px rgba(232, 93, 38, 0.12);
+}
+
+.img-uploader-zone.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #F8FAFC;
+}
+
+.img-uploader-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.img-uploader-zone:hover:not(.disabled) .img-uploader-icon,
+.img-uploader-zone.dragover .img-uploader-icon {
+  transform: scale(1.15);
+}
+
+.img-uploader-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.img-uploader-title span {
+  color: #E85D26;
+  text-decoration: underline;
+}
+
+.img-uploader-sub {
+  font-size: 0.78rem;
+  color: #94A3B8;
+}
+
+/* ── Validation Errors ─────────────────────────────────── */
+.img-uploader-errors {
+  background: #FFF5F5;
+  border: 1.5px solid #FECACA;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.img-uploader-error-item {
+  font-size: 0.8rem;
+  color: #DC2626;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Preview Grid ──────────────────────────────────────── */
+.img-uploader-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.img-uploader-clear-btn {
+  background: none;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.img-uploader-clear-btn:hover {
+  border-color: #EF4444;
+  color: #EF4444;
+  background: #FFF5F5;
+}
+
+.img-uploader-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.img-uploader-thumb {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #F1F5F9;
+  border: 1.5px solid #E2E8F0;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.img-uploader-thumb img {
+  width: 100%;
+  flex: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.img-uploader-thumb-info {
+  padding: 4px 6px;
+  background: rgba(255,255,255,0.95);
+  border-top: 1px solid #F1F5F9;
+}
+
+.img-uploader-thumb-name {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.img-uploader-thumb-size {
+  font-size: 0.6rem;
+  color: #94A3B8;
+}
+
+.img-uploader-thumb-remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.9);
+  color: #fff;
+  border: none;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, background 0.15s;
+  line-height: 1;
+}
+
+.img-uploader-thumb-remove:hover {
+  background: #DC2626;
+  transform: scale(1.1);
+}
+
+/* ── Progress bar (per file) ────────────────────────────── */
+.img-uploader-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.img-uploader-progress-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.img-uploader-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.img-uploader-progress-bar {
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.img-uploader-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #E85D26, #ff7a47);
+  transition: width 0.3s ease;
+}
+
+.img-uploader-progress-fill.done  { background: #10B981; }
+.img-uploader-progress-fill.error { background: #EF4444; }
+
+/* ── Action Buttons ─────────────────────────────────────── */
+.img-uploader-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.img-uploader-submit {
+  flex: 1;
+  padding: 12px;
+  background: linear-gradient(135deg, #E85D26, #c94a1e);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.img-uploader-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c94a1e, #a83b16);
+  box-shadow: 0 4px 16px rgba(232,93,38,0.35);
+}
+
+.img-uploader-submit:disabled {
+  background: #CBD5E1;
+  cursor: not-allowed;
+}
+
+.img-uploader-count {
+  font-size: 0.78rem;
+  color: #64748B;
+  font-weight: 500;
+  text-align: center;
+  padding: 4px 0;
+}
+
+.img-uploader-count strong {
+  color: #E85D26;
+}
+
+/* ── Success message ────────────────────────────────────── */
+.img-uploader-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ECFDF5;
+  border: 1.5px solid #6EE7B7;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #065F46;
+}
+
+@media (max-width: 480px) {
+  .img-uploader-grid { grid-template-columns: repeat(2, 1fr); }
+}
